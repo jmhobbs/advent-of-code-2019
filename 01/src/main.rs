@@ -1,0 +1,16 @@
+use std::fs::File;
+use std::io::BufReader;
+use std::io::prelude::*;
+use aoc_2019_01::find_fuel_requirement;
+
+fn main() -> std::io::Result<()> {
+    let file = File::open("input")?;
+    let buf_reader = BufReader::new(file);
+    let mut sum: i32 = 0;
+    for line in buf_reader.lines() {
+        let i: i32 = line?.parse().unwrap_or(0);
+        sum = sum + find_fuel_requirement(i)
+    }
+    println!("A: {}", sum);
+    Ok(())
+}
