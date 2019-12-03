@@ -3,7 +3,19 @@ pub fn find_fuel_requirement(mass: i32) -> i32 {
 }
 
 pub fn find_fuel_fuel_requirement(mass: i32) -> i32 {
-    0
+    let mut sum: i32 = mass;
+    let mut last: i32 = mass;
+
+    loop {
+        let current: i32 = find_fuel_requirement(last);
+        if current <= 0 {
+            break
+        }
+        sum = sum + current;
+        last = current;
+    }
+
+    sum
 }
 
 #[cfg(test)]
