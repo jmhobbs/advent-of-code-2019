@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+root="$(pwd)"
+
+find "$root" -maxdepth 1 -type d -regex '.*/[0-9]*' | while read -r dir; do
+  cd "$dir" || exit 1
+  cargo test
+  cd "$root" || exit 1
+done
