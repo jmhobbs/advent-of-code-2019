@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+usage () {
+  if [ "$1" != "" ]; then
+    echo "error: $1"
+    echo
+  fi
+  echo "usage: download-input <day>"
+  exit 1
+}
+
+if [ "$AOC_SESSION" == "" ]; then
+  usage "AOC_SESSION environment variable is not set."
+fi
+
+dayre='^[0-9]+$'
+if ! [[ $1 =~ $dayre ]] ; then
+  usage "'$1' is not a day, please supply a day"
+fi
+
+curl --cookie "session=$AOC_SESSION" https://adventofcode.com/2019/day/$1/input -o input --silent
